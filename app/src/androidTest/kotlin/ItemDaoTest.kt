@@ -83,6 +83,8 @@ class ItemDaoTest {
         assertEquals(allItems[1], Item(2, "Bananas", 5.0, 50))
     }
 
+
+    //test for delete feature
     @Test
     @Throws(Exception::class)
     fun daoDeletesItems_DeleteAllItemsFromDb() = runBlocking{
@@ -91,5 +93,14 @@ class ItemDaoTest {
         itemDao.delete(item2)
         val allItems = itemDao.getAllItems().first()
         assertTrue(allItems.isEmpty())
+    }
+
+    //test for update feature
+    @Test
+    @Throws(Exception::class)
+    fun daoGetItem_returnsItemFromDB() = runBlocking {
+        addOneItemToDb()
+        val item = itemDao.getItem(1)
+        assertEquals(item.first(), item1)
     }
 }
